@@ -9,23 +9,11 @@
 import Foundation
 
 
-/// JSON Error Exception
-enum JSONError: Error {
-    case serialization
-}
-
-extension JSONError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .serialization:
-            return NSLocalizedString("Serialization error", comment: "")
-        }
-    }
-}
-
 /// API Error Exception
 enum ApiError: Error {
     case serverError
+    case serialization
+    case noToken
 }
 
 extension ApiError: LocalizedError {
@@ -33,6 +21,11 @@ extension ApiError: LocalizedError {
         switch self {
         case .serverError:
             return NSLocalizedString("Something went wrong when requesting data", comment: "")
+        case .serialization:
+            return NSLocalizedString("Serialization error", comment: "")
+        case .noToken:
+            return NSLocalizedString("Cannot get token", comment: "")
         }
+        
     }
 }

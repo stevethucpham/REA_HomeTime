@@ -12,7 +12,7 @@ protocol TramServiceType {
     var session: URLSession { get }
     func fetchApiToken(completion: @escaping (_ result: ServiceResult<String?>) -> Void)
     func loadTramDataUsing(stopId: String, completion: @escaping (_ result: ServiceResult<[TramData]?>) -> Void)
-    func request<T: Decodable> (from url: URLRequest, completionHandler: @escaping (ServiceResult<T>) -> Void)
+    func request<T: Decodable> (from url: URL, completionHandler: @escaping (ServiceResult<T>) -> Void)
 }
 
 // MARK: Extension Tram Service Type
@@ -21,7 +21,7 @@ extension TramServiceType {
     /// - Parameters:
     ///   - url: API URL
     ///   - completionHandler: the completion handler which returns a decodable type if success, otherwise returns error.
-    func request<T: Decodable> (from url: URLRequest, completionHandler: @escaping (ServiceResult<T>) -> Void) {
+    func request<T: Decodable> (from url: URL, completionHandler: @escaping (ServiceResult<T>) -> Void) {
         let task = session.dataTask(with: url) { data, response , error in
             
             guard let dataObject = data else { completionHandler(.failure(error)); return  }
@@ -35,7 +35,7 @@ extension TramServiceType {
                 debugPrint(jsonResponse)
                 completionHandler(.success(jsonResponse))
             } catch {
-                completionHandler(.failure(JSONError.serialization))
+                completionHandler(.failure(ApiError.serialization))
             }
             
         }
@@ -59,10 +59,10 @@ class TramService: TramServiceType {
     /// - Parameter completion: completion handler returns *ServiceResult* with success and failure case
     func fetchApiToken(completion: @escaping (ServiceResult<String?>) -> Void) {
         let url = URL(string: Constants.Service.tokenUrl)!
-        request(from: URLRequest(url: url)) { (result: ServiceResult<TramResponseObject<String>>) in
+        request(from: url) { (result: ServiceResult<TramResponseObject<Token>>) in
             switch result {
             case .success(let response):
-                completion(ServiceResult.success(response.responseObject?.first))
+                completion(ServiceResult.success(response.responseObject.first?.deviceToken))
                 break
             case .failure(let error):
                 completion(ServiceResult.failure(error))
@@ -76,17 +76,37 @@ class TramService: TramServiceType {
     ///   - stopId: the tram stop id
     ///   - completion: completion handler returns *ServiceResult* with success and failure case
     func loadTramDataUsing(stopId: String, completion: @escaping (ServiceResult<[TramData]?>) -> Void) {
-        let url = URL(string: Constants.Service.tramUrl)!
-        request(from: URLRequest(url: url)) { (result: ServiceResult<TramResponseObject<TramData>>) in
+        fetchApiToken { (result) in
             switch result {
-            case .success(let response):
-                completion(ServiceResult.success(response.responseObject))
+            case .success(let token):
+                guard let token = token else {
+                    completion(ServiceResult.failure(ApiError.noToken))
+                    return
+                }
+                let url = URL(string: self.urlFor(stopId: stopId, token: token))!
+                self.request(from: url) { (result: ServiceResult<TramResponseObject<TramData>>) in
+                    switch result {
+                    case .success(let response):
+                        completion(ServiceResult.success(response.responseObject))
+                        break
+                    case .failure(let error):
+                        completion(ServiceResult.failure(error))
+                        break
+                    }
+                }
                 break
             case .failure(let error):
                 completion(ServiceResult.failure(error))
                 break
             }
         }
-        
+    }
+    
+    /// This function returns a *url string* to aid to fetch tram timetable data.
+    /// - Parameter stopId: stopId
+    /// - Parameter token: token
+    /// - returns: complete url to retrieve the tram timetable data
+    func urlFor(stopId: String, token: String) -> String {
+        return Constants.Service.tramUrl.replacingOccurrences(of: "{STOP_ID}", with: stopId).replacingOccurrences(of: "{TOKEN}", with: token)
     }
 }

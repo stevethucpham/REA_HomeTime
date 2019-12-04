@@ -9,7 +9,7 @@
 import Foundation
 
 struct TramResponseObject<T: Decodable>: Decodable {
-    let responseObject: [T]?
+    let responseObject: [T]
 }
 
 struct TramData: Decodable {
@@ -20,9 +20,16 @@ struct TramData: Decodable {
     /// The route number of the tram
     var routeNo: String?
     
-    enum TramDataKey: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case destination = "Destination"
         case predictedArrivalDateTime = "PredictedArrivalDateTime"
         case routeNo = "RouteNo"
+    }
+}
+
+struct Token: Decodable {
+    let deviceToken: String?
+    enum CodingKeys: String, CodingKey {
+        case deviceToken = "DeviceToken"
     }
 }
