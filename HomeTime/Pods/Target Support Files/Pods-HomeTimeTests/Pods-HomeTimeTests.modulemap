@@ -1,0 +1,6 @@
+framework module Pods_HomeTimeTests {
+  umbrella header "Pods-HomeTimeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

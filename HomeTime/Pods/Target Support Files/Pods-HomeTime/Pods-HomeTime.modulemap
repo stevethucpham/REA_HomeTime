@@ -1,0 +1,6 @@
+framework module Pods_HomeTime {
+  umbrella header "Pods-HomeTime-umbrella.h"
+
+  export *
+  module * { export * }
+}

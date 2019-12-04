@@ -6,9 +6,9 @@ import UIKit
 
 typealias JSONDictionary = [String: Any]
 
-enum JSONError: Error {
-  case serialization
-}
+//enum JSONError: Error {
+//  case serialization
+//}
 
 class ViewController: UITableViewController {
 

@@ -16,6 +16,11 @@
 		331BFAA31F973E8000E10979 /* DotNetDateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331BFAA21F973E8000E10979 /* DotNetDateConverter.swift */; };
 		3364EC881F98236E00161053 /* DateFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364EC871F98236E00161053 /* DateFormatterTest.swift */; };
 		54ED0319DC3CC3A9366207DE /* Pods_HomeTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A07D474CE395E42F62BE85 /* Pods_HomeTimeTests.framework */; };
+		6A068C642396649D005AAA6A /* TramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A068C632396649D005AAA6A /* TramService.swift */; };
+		6A068C672396653A005AAA6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A068C662396653A005AAA6A /* Constants.swift */; };
+		6A068C6923966814005AAA6A /* TramData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A068C6823966814005AAA6A /* TramData.swift */; };
+		6A068C6B239672CD005AAA6A /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A068C6A239672CD005AAA6A /* ServiceError.swift */; };
+		6A068C6D23967F8C005AAA6A /* ServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A068C6C23967F8C005AAA6A /* ServiceResult.swift */; };
 		83E7869F25318958E28F6AD9 /* Pods_HomeTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2415AF054FE18CFDAC6692CD /* Pods_HomeTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +50,11 @@
 		331BFAA21F973E8000E10979 /* DotNetDateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotNetDateConverter.swift; sourceTree = "<group>"; };
 		3364EC871F98236E00161053 /* DateFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTest.swift; sourceTree = "<group>"; };
 		3CB7CB1C860FAFBD4F79371D /* Pods-HomeTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTime/Pods-HomeTime.release.xcconfig"; sourceTree = "<group>"; };
+		6A068C632396649D005AAA6A /* TramService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramService.swift; sourceTree = "<group>"; };
+		6A068C662396653A005AAA6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6A068C6823966814005AAA6A /* TramData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramData.swift; sourceTree = "<group>"; };
+		6A068C6A239672CD005AAA6A /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		6A068C6C23967F8C005AAA6A /* ServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResult.swift; sourceTree = "<group>"; };
 		91E1605E89E74E01785D5868 /* Pods-HomeTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		AC3DF52AA8D0F3DFFE4C9E93 /* Pods-HomeTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0990E01D57F549B4FDF5FB8 /* Pods-HomeTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTime/Pods-HomeTime.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,12 +105,13 @@
 		330D12631F96F40E00463505 /* HomeTime */ = {
 			isa = PBXGroup;
 			children = (
+				6A068C5D239662CC005AAA6A /* Service */,
+				6A068C5C239662C6005AAA6A /* Model */,
+				6A068C5B239662BB005AAA6A /* ViewModel */,
+				6A068C5A239662B0005AAA6A /* View */,
+				6A068C5923966276005AAA6A /* Shared */,
 				330D12641F96F40E00463505 /* AppDelegate.swift */,
-				330D12661F96F40E00463505 /* ViewController.swift */,
-				331BFAA21F973E8000E10979 /* DotNetDateConverter.swift */,
-				330D12681F96F40E00463505 /* Main.storyboard */,
 				330D126B1F96F40E00463505 /* Assets.xcassets */,
-				330D126D1F96F40E00463505 /* LaunchScreen.storyboard */,
 				330D12701F96F40E00463505 /* Info.plist */,
 			);
 			path = HomeTime;
@@ -125,6 +136,98 @@
 				91E1605E89E74E01785D5868 /* Pods-HomeTimeTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6A068C5923966276005AAA6A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6A068C6523966524005AAA6A /* Constants */,
+				6A068C6223966321005AAA6A /* Helper */,
+				6A068C612396631B005AAA6A /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		6A068C5A239662B0005AAA6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A068C60239662F7005AAA6A /* Cell */,
+				6A068C5F239662EC005AAA6A /* Controller */,
+				6A068C5E239662E1005AAA6A /* Storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6A068C5B239662BB005AAA6A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6A068C5C239662C6005AAA6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6A068C6823966814005AAA6A /* TramData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6A068C5D239662CC005AAA6A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6A068C632396649D005AAA6A /* TramService.swift */,
+				6A068C6A239672CD005AAA6A /* ServiceError.swift */,
+				6A068C6C23967F8C005AAA6A /* ServiceResult.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6A068C5E239662E1005AAA6A /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				330D126D1F96F40E00463505 /* LaunchScreen.storyboard */,
+				330D12681F96F40E00463505 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		6A068C5F239662EC005AAA6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				330D12661F96F40E00463505 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6A068C60239662F7005AAA6A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6A068C612396631B005AAA6A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6A068C6223966321005AAA6A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				331BFAA21F973E8000E10979 /* DotNetDateConverter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		6A068C6523966524005AAA6A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6A068C662396653A005AAA6A /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		76712BB3B07910E31AB7D7AB /* Frameworks */ = {
@@ -303,9 +406,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A068C672396653A005AAA6A /* Constants.swift in Sources */,
 				330D12671F96F40E00463505 /* ViewController.swift in Sources */,
 				331BFAA31F973E8000E10979 /* DotNetDateConverter.swift in Sources */,
 				330D12651F96F40E00463505 /* AppDelegate.swift in Sources */,
+				6A068C642396649D005AAA6A /* TramService.swift in Sources */,
+				6A068C6B239672CD005AAA6A /* ServiceError.swift in Sources */,
+				6A068C6D23967F8C005AAA6A /* ServiceResult.swift in Sources */,
+				6A068C6923966814005AAA6A /* TramData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
