@@ -68,9 +68,11 @@ class TramService: TramServiceType {
         session = URLSession(configuration: config, delegate: nil, delegateQueue: OperationQueue.main)
     }
     
+    init(session: URLSession, token: String? = nil) {
+        self.session = session
+        self.token = token
+    }
     
-    /// This function returns a *token* within a completion handler
-    /// - Parameter completion: completion handler returns *ServiceResult* with success and failure case
     func fetchApiToken(completion: @escaping (ServiceResult<String?>) -> Void) {
         let url = URL(string: Constants.Service.tokenUrl)!
         if let token = token {
@@ -90,10 +92,6 @@ class TramService: TramServiceType {
         }
     }
     
-    /// This function returns an array of *TramData* within a completion handler
-    /// - Parameters:
-    ///   - stopId: the tram stop id
-    ///   - completion: completion handler returns *ServiceResult* with success and failure case
     func loadTramDataUsing(stopId: String, completion: @escaping (ServiceResult<[TramData]?>) -> Void) {
         fetchApiToken { (result) in
             switch result {

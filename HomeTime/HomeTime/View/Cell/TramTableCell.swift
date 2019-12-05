@@ -21,7 +21,7 @@ class TramTableCell: UITableViewCell {
         // Initialization code
     }
     
-    /// This method is used to set text for the labels
+    /// This method is used to set value for the labels of the cell
     /// - Parameters:
     ///   - routeNo: tram route number
     ///   - arrivalTime: arrival time expected

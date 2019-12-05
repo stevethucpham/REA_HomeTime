@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33070CE91F987F6D003CC41D /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33070CE81F987F6D003CC41D /* ViewControllerSpec.swift */; };
+		33070CE91F987F6D003CC41D /* TramViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33070CE81F987F6D003CC41D /* TramViewControllerSpec.swift */; };
 		330D12651F96F40E00463505 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330D12641F96F40E00463505 /* AppDelegate.swift */; };
 		330D12671F96F40E00463505 /* TramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330D12661F96F40E00463505 /* TramViewController.swift */; };
 		330D126A1F96F40E00463505 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330D12681F96F40E00463505 /* Main.storyboard */; };
@@ -26,6 +26,10 @@
 		6AC37C652398B5BD00D1F128 /* TramTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC37C632398B5BD00D1F128 /* TramTableCell.xib */; };
 		6AC37C672398B86A00D1F128 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C662398B86A00D1F128 /* Extensions.swift */; };
 		6AC37C692398F09100D1F128 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C682398F09100D1F128 /* UIViewControllerExtension.swift */; };
+		6AC37C6C2399049B00D1F128 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C6B2399049B00D1F128 /* MockURLSession.swift */; };
+		6AC37C6E239926D700D1F128 /* TramViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C6D239926D600D1F128 /* TramViewModelTest.swift */; };
+		6AC37C70239926E300D1F128 /* TramServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C6F239926E300D1F128 /* TramServiceTest.swift */; };
+		6AC37C7223994F8A00D1F128 /* ImplementationExplain.md in Resources */ = {isa = PBXBuildFile; fileRef = 6AC37C7123994F8A00D1F128 /* ImplementationExplain.md */; };
 		83E7869F25318958E28F6AD9 /* Pods_HomeTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2415AF054FE18CFDAC6692CD /* Pods_HomeTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		2415AF054FE18CFDAC6692CD /* Pods_HomeTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33070CE81F987F6D003CC41D /* ViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
+		33070CE81F987F6D003CC41D /* TramViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramViewControllerSpec.swift; sourceTree = "<group>"; };
 		33070CF61F997EC9003CC41D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		330D12611F96F40E00463505 /* HomeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330D12641F96F40E00463505 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,10 @@
 		6AC37C632398B5BD00D1F128 /* TramTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TramTableCell.xib; sourceTree = "<group>"; };
 		6AC37C662398B86A00D1F128 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6AC37C682398F09100D1F128 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		6AC37C6B2399049B00D1F128 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		6AC37C6D239926D600D1F128 /* TramViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramViewModelTest.swift; sourceTree = "<group>"; };
+		6AC37C6F239926E300D1F128 /* TramServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramServiceTest.swift; sourceTree = "<group>"; };
+		6AC37C7123994F8A00D1F128 /* ImplementationExplain.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ImplementationExplain.md; sourceTree = "<group>"; };
 		91E1605E89E74E01785D5868 /* Pods-HomeTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		AC3DF52AA8D0F3DFFE4C9E93 /* Pods-HomeTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0990E01D57F549B4FDF5FB8 /* Pods-HomeTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTime/Pods-HomeTime.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +102,7 @@
 		330D12581F96F40E00463505 = {
 			isa = PBXGroup;
 			children = (
+				6AC37C7123994F8A00D1F128 /* ImplementationExplain.md */,
 				33070CF61F997EC9003CC41D /* README.md */,
 				330D12631F96F40E00463505 /* HomeTime */,
 				330D12781F96F40E00463505 /* HomeTimeTests */,
@@ -130,9 +139,12 @@
 		330D12781F96F40E00463505 /* HomeTimeTests */ = {
 			isa = PBXGroup;
 			children = (
+				6AC37C6A2399047F00D1F128 /* Mock Data */,
 				3364EC871F98236E00161053 /* DateFormatterTest.swift */,
-				33070CE81F987F6D003CC41D /* ViewControllerSpec.swift */,
+				33070CE81F987F6D003CC41D /* TramViewControllerSpec.swift */,
 				330D127B1F96F40E00463505 /* Info.plist */,
+				6AC37C6D239926D600D1F128 /* TramViewModelTest.swift */,
+				6AC37C6F239926E300D1F128 /* TramServiceTest.swift */,
 			);
 			path = HomeTimeTests;
 			sourceTree = "<group>";
@@ -245,6 +257,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		6AC37C6A2399047F00D1F128 /* Mock Data */ = {
+			isa = PBXGroup;
+			children = (
+				6AC37C6B2399049B00D1F128 /* MockURLSession.swift */,
+			);
+			path = "Mock Data";
+			sourceTree = "<group>";
+		};
 		76712BB3B07910E31AB7D7AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC37C7223994F8A00D1F128 /* ImplementationExplain.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,8 +462,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC37C70239926E300D1F128 /* TramServiceTest.swift in Sources */,
+				6AC37C6C2399049B00D1F128 /* MockURLSession.swift in Sources */,
 				3364EC881F98236E00161053 /* DateFormatterTest.swift in Sources */,
-				33070CE91F987F6D003CC41D /* ViewControllerSpec.swift in Sources */,
+				6AC37C6E239926D700D1F128 /* TramViewModelTest.swift in Sources */,
+				33070CE91F987F6D003CC41D /* TramViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

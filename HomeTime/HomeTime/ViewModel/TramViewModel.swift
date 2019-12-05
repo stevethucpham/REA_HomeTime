@@ -10,14 +10,19 @@ import Foundation
 
 // MARK: Tram View Model Type
 protocol TramViewModelType {
+    
     /// This method used to clear all data
     func clearTramData()
+    
     /// This function is used to load tram data of the stop ID 4055 for the North and 4155 for the South.
     func loadTramData()
+    
     /// Get the number of trams in the North
     func getNorthTramsCount() -> Int
+    
     /// Get the number of trams in the South
     func getSouthTramsCount() -> Int
+    
     /// Get the route number of tram for the table view cell
     /// - Parameter indexPath: the table index path
     func getTramNumber(at indexPath: IndexPath) -> String
@@ -28,7 +33,8 @@ protocol TramViewModelType {
     
     ///  Get the time interval between the arrival time and current time for the table view cell
     /// - Parameter indexPath: the table index path
-    func getTimeInterval(at indexPath: IndexPath) -> String
+    /// - Parameter sinceTime: time to compare
+    func getTimeInterval(at indexPath: IndexPath, sinceTime: Date) -> String
     
     ///  Get the destination of the tram for the table view cell
     /// - Parameter indexPath: the table index path
@@ -52,7 +58,6 @@ class TramViewModel: TramViewModelType {
     
     init(service: TramServiceType = TramService()) {
         self.service = service
-        loadTramData()
     }
     
     // MARK: Input
@@ -66,15 +71,13 @@ class TramViewModel: TramViewModelType {
         reloadTable()
     }
     
-    /// Get the number of trams in the North
     func getNorthTramsCount() -> Int {
         if let northTrams = northTrams {
             return northTrams.count
         }
         return 1
     }
-    
-    /// Get the number of trams in the South
+
     func getSouthTramsCount() -> Int {
         if let southTrams = southTrams {
             return southTrams.count
@@ -108,13 +111,13 @@ class TramViewModel: TramViewModelType {
         return dateConverter.formattedDateFromString(arrivalDateString)
     }
     
-    func getTimeInterval(at indexPath: IndexPath) -> String {
+    func getTimeInterval(at indexPath: IndexPath, sinceTime: Date) -> String {
         let trams = tramsFor(section: indexPath.section)
         let dateConverter = DotNetDateConverter()
         guard let arrivalTime = trams?[indexPath.row].predictedArrivalDateTime, let tramTime = dateConverter.dateFromDotNetFormattedDateString(arrivalTime) else {
           return ""
         }
-        return " (\(Date().timeDifference(since: tramTime)))"
+        return " (\(tramTime.timeDifference(since: sinceTime)))"
     }
     
     func getDestination(at indexPath: IndexPath) -> String {

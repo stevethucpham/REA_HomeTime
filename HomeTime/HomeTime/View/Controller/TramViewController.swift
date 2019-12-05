@@ -10,14 +10,14 @@ class TramViewController: UITableViewController {
     // MARK: IBOutlets
   @IBOutlet var tramTimesTable: UITableView!
 
-    lazy var viewModel: TramViewModelType = {
-        return TramViewModel()
-    }()
+    var viewModel: TramViewModelType!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    viewModel = TramViewModel()
     setupTableView()
     bindUI()
+    
   }
 
   @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
@@ -29,7 +29,7 @@ class TramViewController: UITableViewController {
     viewModel.loadTramData()
   }
     
-    private func bindUI() {
+     func bindUI() {
         viewModel.reloadTable = { [weak self] () in
             DispatchQueue.main.async {
                 self?.tramTimesTable.reloadData()
@@ -54,7 +54,7 @@ class TramViewController: UITableViewController {
 extension TramViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.tramCell, for: indexPath) as! TramTableCell
-    cell.setupCell(routeNo: viewModel.getTramNumber(at: indexPath), arrivalTime: viewModel.getTramArrivalTime(at: indexPath), timeInterval: viewModel.getTimeInterval(at: indexPath), destination: viewModel.getDestination(at: indexPath))
+    cell.setupCell(routeNo: viewModel.getTramNumber(at: indexPath), arrivalTime: viewModel.getTramArrivalTime(at: indexPath), timeInterval: viewModel.getTimeInterval(at: indexPath, sinceTime: Date()), destination: viewModel.getDestination(at: indexPath))
     return cell
   }
 

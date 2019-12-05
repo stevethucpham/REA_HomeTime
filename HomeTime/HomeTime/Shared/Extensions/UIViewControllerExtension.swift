@@ -17,12 +17,13 @@ extension UIViewController {
     ///   - message: The alert message
     ///   - okButtonTitle: The title of button
     func alert(title: String, message: String, okButtonTitle: String) {
-           let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-           let actionOk = UIAlertAction(title: okButtonTitle,
-                                        style: .default,
-                                        handler: nil)
-           
-           alert.addAction(actionOk)
-           self.present(alert, animated: true, completion: nil)
-       }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tag = 7777
+        let actionOk = UIAlertAction(title: okButtonTitle,
+                                     style: .default,
+                                     handler: nil)
+        
+        alert.addAction(actionOk)
+        self.present(alert, animated: true, completion: nil)
+    }
 }

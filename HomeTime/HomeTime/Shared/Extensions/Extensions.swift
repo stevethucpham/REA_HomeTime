@@ -30,7 +30,7 @@ extension Date {
         } else if minutes != 0 {
             return "\(minutes.of("minute"))"
         } else {
-            return "Just now"
+            return "now"
         }
     }
 }
