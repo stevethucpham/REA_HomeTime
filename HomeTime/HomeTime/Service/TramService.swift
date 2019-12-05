@@ -10,16 +10,29 @@ import Foundation
 // MARK: Tram Service Type
 protocol TramServiceType {
     var session: URLSession { get }
+    
+    /// This function returns a *token* within a completion handler
+    /// - Parameter completion: completion handler returns *ServiceResult* with success and failure case
     func fetchApiToken(completion: @escaping (_ result: ServiceResult<String?>) -> Void)
+    
+    /// This function returns an array of *TramData* within a completion handler
+    /// - Parameters:
+    ///   - stopId: the tram stop id
+    ///   - completion: completion handler returns *ServiceResult* with success and failure case
     func loadTramDataUsing(stopId: String, completion: @escaping (_ result: ServiceResult<[TramData]?>) -> Void)
+    
+    /// This API request the API and decode the JSON Response
+    /// - Parameters:
+    ///   - url: API URL
+    ///   - completionHandler: the completion handler which returns a decodable type if success, otherwise returns error.
     func request<T: Decodable> (from url: URL, completionHandler: @escaping (ServiceResult<T>) -> Void)
 }
 
 // MARK: Extension Tram Service Type
 extension TramServiceType {
-    /// This API request the API and decode the JSON Response
+    /// This function requests the API and deserialize the JSON into the model
     /// - Parameters:
-    ///   - url: API URL
+    ///   - url: API URL 
     ///   - completionHandler: the completion handler which returns a decodable type if success, otherwise returns error.
     func request<T: Decodable> (from url: URL, completionHandler: @escaping (ServiceResult<T>) -> Void) {
         let task = session.dataTask(with: url) { data, response , error in
