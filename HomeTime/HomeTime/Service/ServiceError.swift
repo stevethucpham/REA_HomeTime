@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// API Error Exception
 enum ApiError: Error {
     case serverError

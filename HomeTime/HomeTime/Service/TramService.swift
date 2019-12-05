@@ -48,6 +48,7 @@ extension TramServiceType {
 class TramService: TramServiceType {
     
     let session: URLSession
+    var token: String?
     
     init() {
         let config = URLSessionConfiguration.default
@@ -59,14 +60,19 @@ class TramService: TramServiceType {
     /// - Parameter completion: completion handler returns *ServiceResult* with success and failure case
     func fetchApiToken(completion: @escaping (ServiceResult<String?>) -> Void) {
         let url = URL(string: Constants.Service.tokenUrl)!
-        request(from: url) { (result: ServiceResult<TramResponseObject<Token>>) in
-            switch result {
-            case .success(let response):
-                completion(ServiceResult.success(response.responseObject.first?.deviceToken))
-                break
-            case .failure(let error):
-                completion(ServiceResult.failure(error))
-                break
+        if let token = token {
+            completion(ServiceResult.success(token))
+        } else {
+            request(from: url) { (result: ServiceResult<TramResponseObject<Token>>) in
+                switch result {
+                case .success(let response):
+                    self.token = response.responseObject.first?.deviceToken
+                    completion(ServiceResult.success(response.responseObject.first?.deviceToken))
+                    break
+                case .failure(let error):
+                    completion(ServiceResult.failure(error))
+                    break
+                }
             }
         }
     }

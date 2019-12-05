@@ -20,8 +20,6 @@ class DotNetDateConverter {
 
   func formattedDateFromString(_ string: String) -> String {
     let date = dateFromDotNetFormattedDateString(string)
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-    return formatter.string(from: date!)
+    return date!.timeIn12HourFormat()
   }
 }
