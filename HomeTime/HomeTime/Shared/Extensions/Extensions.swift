@@ -11,6 +11,14 @@ import Foundation
 // MARK: Date Extension
 extension Date {
     
+    init(_ timeString: String) {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateFormat = "HH:mm"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+        let date = dateStringFormatter.date(from: timeString)!
+        self.init(timeInterval:0, since:date)
+    }
+    
     /// This method is used to display the hour in 12 hour format
     func timeIn12HourFormat() -> String {
         let formatter = DateFormatter()

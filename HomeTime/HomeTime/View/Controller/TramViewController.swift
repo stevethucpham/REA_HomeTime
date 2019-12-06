@@ -6,30 +6,30 @@ import UIKit
 
 
 class TramViewController: UITableViewController {
-
+    
     // MARK: IBOutlets
-  @IBOutlet var tramTimesTable: UITableView!
-
+    @IBOutlet var tramTimesTable: UITableView!
+    
     var viewModel: TramViewModelType!
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    viewModel = TramViewModel()
-    setupTableView()
-    bindUI()
     
-  }
-
-  @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-    viewModel.clearTramData()
-  }
-
-  @IBAction func loadButtonTapped(_ sender: UIBarButtonItem) {
-    viewModel.clearTramData()
-    viewModel.loadTramData()
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel = TramViewModel()
+        setupTableView()
+        bindUI()
+        
+    }
     
-     func bindUI() {
+    @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.clearTramData()
+    }
+    
+    @IBAction func loadButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.clearTramData()
+        viewModel.loadTramData()
+    }
+    
+    private func bindUI() {
         viewModel.reloadTable = { [weak self] () in
             DispatchQueue.main.async {
                 self?.tramTimesTable.reloadData()
@@ -52,28 +52,28 @@ class TramViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 extension TramViewController {
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.tramCell, for: indexPath) as! TramTableCell
-    cell.setupCell(routeNo: viewModel.getTramNumber(at: indexPath), arrivalTime: viewModel.getTramArrivalTime(at: indexPath), timeInterval: viewModel.getTimeInterval(at: indexPath, sinceTime: Date()), destination: viewModel.getDestination(at: indexPath))
-    return cell
-  }
-
-  override func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
-  }
-
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if (section == 0)
-    {
-        return viewModel.getNorthTramsCount()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.tramCell, for: indexPath) as! TramTableCell
+        cell.setupCell(routeNo: viewModel.getTramNumber(at: indexPath), arrivalTime: viewModel.getTramArrivalTime(at: indexPath), timeInterval: viewModel.getTimeInterval(at: indexPath, sinceTime: Date()), destination: viewModel.getDestination(at: indexPath))
+        return cell
     }
-    else
-    {
-      return viewModel.getSouthTramsCount()
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
-  }
-
-  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return section == 0 ? "North" : "South"
-  }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == 0)
+        {
+            return viewModel.getNorthTramsCount()
+        }
+        else
+        {
+            return viewModel.getSouthTramsCount()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "North" : "South"
+    }
 }
