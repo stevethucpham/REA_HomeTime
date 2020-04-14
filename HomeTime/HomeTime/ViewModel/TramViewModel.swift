@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 // MARK: Tram View Model Type
 protocol TramViewModelType {
@@ -17,11 +18,15 @@ protocol TramViewModelType {
     /// This function is used to load tram data of the stop ID 4055 for the North and 4155 for the South.
     func loadTramData()
     
-    /// Get the number of trams in the North
-    func getNorthTramsCount() -> Int
+    func getTramCount(index: Int) -> Int
     
-    /// Get the number of trams in the South
-    func getSouthTramsCount() -> Int
+    func getStopDirection(section: Int) -> String
+    
+//    /// Get the number of trams in the North
+//    func getNorthTramsCount() -> Int
+//
+//    /// Get the number of trams in the South
+//    func getSouthTramsCount() -> Int
     
     /// Get the route number of tram for the table view cell
     /// - Parameter indexPath: the table index path
@@ -47,14 +52,30 @@ protocol TramViewModelType {
     var reloadTable: (()->())? { get set }
 }
 
+enum LoadingStatus {
+    case loaded
+    case loading
+    case none
+}
+
+struct Stop {
+    var direction: String
+    var stopId: String
+    var tramlist: [TramData]?
+    var status: LoadingStatus = .none
+}
+
 
 // MARK: Tram View Model
 class TramViewModel: TramViewModelType {
-    private var northTrams: [TramData]?
-    private var southTrams: [TramData]?
+
     let service: TramServiceType
     private var loadingNorth: Bool = false
     private var loadingSouth: Bool = false
+    private var stops: [Stop] = [
+        Stop(direction: "North", stopId: "4055", tramlist: nil),
+        Stop(direction: "South", stopId: "4155", tramlist: nil)
+    ]
     
     init(service: TramServiceType = TramService()) {
         self.service = service
@@ -63,39 +84,29 @@ class TramViewModel: TramViewModelType {
     // MARK: Input
 
     func clearTramData() {
-        northTrams = nil
-        southTrams = nil
-        loadingNorth = false
-        loadingSouth = false
         guard let reloadTable = self.reloadTable else { return }
         reloadTable()
     }
     
-    func getNorthTramsCount() -> Int {
-        if let northTrams = northTrams {
-            return northTrams.count
-        }
-        return 1
+    func getTramCount(index: Int) -> Int {
+        return stops[index].tramlist?.count ?? 1
     }
-
-    func getSouthTramsCount() -> Int {
-        if let southTrams = southTrams {
-            return southTrams.count
-        }
-        return 1
+    
+    func getStopDirection(section: Int) -> String {
+        return stops[section].direction
     }
     
     func getTramNumber(at indexPath: IndexPath) -> String {
-        guard let trams = tramsFor(section: indexPath.section) else {
+        guard let trams = stops[indexPath.section].tramlist else {
             return ""
         }
         return "Route: \(trams[indexPath.row].routeNo ?? "")"
     }
     
     func getTramArrivalTime(at indexPath: IndexPath) -> String {
-        let trams = tramsFor(section: indexPath.section)
+        let trams = stops[indexPath.section].tramlist
         
-        guard (trams?[indexPath.row]) != nil else{
+        guard (trams?[indexPath.row]) != nil else {
 
             if isLoading(section: indexPath.section) {
                 return "Loading upcoming trams..."
@@ -112,7 +123,7 @@ class TramViewModel: TramViewModelType {
     }
     
     func getTimeInterval(at indexPath: IndexPath, sinceTime: Date) -> String {
-        let trams = tramsFor(section: indexPath.section)
+        let trams = stops[indexPath.section].tramlist
         let dateConverter = DotNetDateConverter()
         guard let arrivalTime = trams?[indexPath.row].predictedArrivalDateTime, let tramTime = dateConverter.dateFromDotNetFormattedDateString(arrivalTime) else {
           return ""
@@ -121,49 +132,37 @@ class TramViewModel: TramViewModelType {
     }
     
     func getDestination(at indexPath: IndexPath) -> String {
-        guard let trams = tramsFor(section: indexPath.section) else {
+        guard let trams = stops[indexPath.section].tramlist else {
             return ""
         }
         return trams[indexPath.row].destination ?? "Melbourne"
     }
-
+    
     
     func loadTramData() {
-        let northStopId = "4055"
-        let southStopId = "4155"
+//        let northStopId = "4055"
+//        let southStopId = "4155"
         startLoading()
-        service.loadTramDataUsing(stopId: northStopId) { [weak self] (result) in
-            switch result {
-            case .success(let trams):
-                self?.stopLoadingNorth()
-                self?.northTrams = trams
-                
-                break
-            case .failure(let error):
-                debugPrint(error?.localizedDescription ?? "Something went wrong")
-                guard let showAlert = self?.showAlertClosure else { return }
-                showAlert(error?.localizedDescription ?? "Something went wrong")
-                break
-            }
-            guard let reloadTable = self?.reloadTable else { return }
-            reloadTable()
-        }
         
-        service.loadTramDataUsing(stopId: southStopId) { [weak self] (result) in
-            switch result {
-            case .success(let trams):
-                self?.stopLoadingSouth()
-                self?.southTrams = trams
-                break
-            case .failure(let error):
-                print(error?.localizedDescription ?? "Something went wrong")
-                guard let showAlert = self?.showAlertClosure else { return }
-                showAlert(error?.localizedDescription ?? "Something went wrong")
-                break
+        
+        for (key,var item) in stops.enumerated() {
+            service.loadTramDataUsing(stopId: item.stopId) { [weak self] (result) in
+                switch result {
+                case .success(let tramData):
+                    item.tramlist = tramData
+                    // TODO: Update the stops
+                    self?.stops[key].tramlist = item.tramlist
+                    guard let reloadTable = self?.reloadTable else { return }
+                    reloadTable()
+                    break
+                case .failure(let error) :
+                    guard let showAlert = self?.showAlertClosure else { return }
+                    showAlert(error?.localizedDescription ?? "Something went wrong")
+                    break
+                }
             }
-            guard let reloadTable = self?.reloadTable else { return }
-            reloadTable()
         }
+
     }
     
     // MARK: Output
@@ -188,8 +187,5 @@ class TramViewModel: TramViewModelType {
     private func isLoading(section: Int) -> Bool {
         return (section == 0) ? loadingNorth : loadingSouth
     }
-    
-    private func tramsFor(section: Int) -> [TramData]? {
-        return (section == 0) ? northTrams : southTrams
-    }
+
 }

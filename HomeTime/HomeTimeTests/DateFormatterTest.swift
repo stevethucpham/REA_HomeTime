@@ -37,7 +37,7 @@ class DateFormatterTest: XCTestCase {
         let expectedTime = currentTestingTime.timeDifference(since: sinceTime)
         XCTAssertEqual(expectedTime, "10 minutes")
     }
-    
+        
     func testTimeDifferenceWithNow() {
         let sinceTime = Date("15:10")
         let expectedTime = currentTestingTime.timeDifference(since: sinceTime)

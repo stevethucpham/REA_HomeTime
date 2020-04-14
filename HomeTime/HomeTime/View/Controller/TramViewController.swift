@@ -63,17 +63,19 @@ extension TramViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0)
-        {
-            return viewModel.getNorthTramsCount()
-        }
-        else
-        {
-            return viewModel.getSouthTramsCount()
-        }
+//        if (section == 0)
+//        {
+//            return viewModel.getNorthTramsCount()
+//        }
+//        else
+//        {
+//            return viewModel.getSouthTramsCount()
+//        }
+        return viewModel.getTramCount(index: section)
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "North" : "South"
+//        return section == 0 ? "North" : "South"
+        return viewModel.getStopDirection(section: section)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 // MARK: Tram Service Type
 protocol TramServiceType {
     var session: URLSession { get }
-    
+    var token: String? { get set }
     /// This function returns a *token* within a completion handler
     /// - Parameter completion: completion handler returns *ServiceResult* with success and failure case
     func fetchApiToken(completion: @escaping (_ result: ServiceResult<String?>) -> Void)
@@ -68,9 +68,14 @@ class TramService: TramServiceType {
         session = URLSession(configuration: config, delegate: nil, delegateQueue: OperationQueue.main)
     }
     
+    
     init(session: URLSession, token: String? = nil) {
         self.session = session
         self.token = token
+    }
+    
+    deinit {
+        print("Tram Service is deallocated")
     }
     
     func fetchApiToken(completion: @escaping (ServiceResult<String?>) -> Void) {
@@ -78,10 +83,10 @@ class TramService: TramServiceType {
         if let token = token {
             completion(ServiceResult.success(token))
         } else {
-            request(from: url) { (result: ServiceResult<TramResponseObject<Token>>) in
+            request(from: url) { [weak self] (result: ServiceResult<TramResponseObject<Token>>) in
                 switch result {
                 case .success(let response):
-                    self.token = response.responseObject.first?.deviceToken
+                    self?.token = response.responseObject.first?.deviceToken
                     completion(ServiceResult.success(response.responseObject.first?.deviceToken))
                     break
                 case .failure(let error):
