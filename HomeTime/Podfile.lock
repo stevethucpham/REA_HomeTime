@@ -1,20 +1,29 @@
 PODS:
   - Nimble (8.0.4)
   - Quick (2.2.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
   - Nimble (~> 8.0)
   - Quick (~> 2.2)
+  - RxRelay (~> 5)
+  - RxSwift (~> 5)
 
 SPEC REPOS:
   trunk:
     - Nimble
     - Quick
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: bd4c7124ad810a76fa90ca9a7caf162c650a0f23
+PODFILE CHECKSUM: 7c14e3d8b9b4f15b3e7f59a97678d640fecceecf
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

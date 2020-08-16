@@ -9,14 +9,15 @@
 import Foundation
 
 /// API Error Exception
-enum ApiError: Error {
+public enum ApiError: Error {
+    case noDataError
     case serverError
     case serialization
     case noToken
 }
 
 extension ApiError: LocalizedError {
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .serverError:
             return NSLocalizedString("Something went wrong when requesting data", comment: "")
@@ -24,6 +25,8 @@ extension ApiError: LocalizedError {
             return NSLocalizedString("Serialization error", comment: "")
         case .noToken:
             return NSLocalizedString("Cannot get token", comment: "")
+        case .noDataError:
+            return NSLocalizedString("No Data", comment: "")
         }
         
     }

@@ -31,6 +31,10 @@
 		6AC37C70239926E300D1F128 /* TramServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC37C6F239926E300D1F128 /* TramServiceTest.swift */; };
 		6AC37C7223994F8A00D1F128 /* ImplementationExplain.md in Resources */ = {isa = PBXBuildFile; fileRef = 6AC37C7123994F8A00D1F128 /* ImplementationExplain.md */; };
 		83E7869F25318958E28F6AD9 /* Pods_HomeTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2415AF054FE18CFDAC6692CD /* Pods_HomeTime.framework */; };
+		A24312D824E7B9080088F30E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24312D724E7B9080088F30E /* NetworkService.swift */; };
+		A24312DA24E8251F0088F30E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24312D924E8251F0088F30E /* APIService.swift */; };
+		A24312DC24E825AA0088F30E /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24312DB24E825AA0088F30E /* Endpoints.swift */; };
+		A24312E024E94D5F0088F30E /* VolatileStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24312DF24E94D5F0088F30E /* VolatileStorageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,10 @@
 		6AC37C6F239926E300D1F128 /* TramServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramServiceTest.swift; sourceTree = "<group>"; };
 		6AC37C7123994F8A00D1F128 /* ImplementationExplain.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ImplementationExplain.md; sourceTree = "<group>"; };
 		91E1605E89E74E01785D5868 /* Pods-HomeTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.release.xcconfig"; sourceTree = "<group>"; };
+		A24312D724E7B9080088F30E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A24312D924E8251F0088F30E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A24312DB24E825AA0088F30E /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		A24312DF24E94D5F0088F30E /* VolatileStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolatileStorageService.swift; sourceTree = "<group>"; };
 		AC3DF52AA8D0F3DFFE4C9E93 /* Pods-HomeTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTimeTests/Pods-HomeTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0990E01D57F549B4FDF5FB8 /* Pods-HomeTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeTime/Pods-HomeTime.debug.xcconfig"; sourceTree = "<group>"; };
 		F7A07D474CE395E42F62BE85 /* Pods_HomeTimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeTimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +132,7 @@
 		330D12631F96F40E00463505 /* HomeTime */ = {
 			isa = PBXGroup;
 			children = (
+				A24312D624E7B8FD0088F30E /* Networking */,
 				6A068C5D239662CC005AAA6A /* Service */,
 				6A068C5C239662C6005AAA6A /* Model */,
 				6A068C5B239662BB005AAA6A /* ViewModel */,
@@ -202,6 +211,7 @@
 				6A068C632396649D005AAA6A /* TramService.swift */,
 				6A068C6A239672CD005AAA6A /* ServiceError.swift */,
 				6A068C6C23967F8C005AAA6A /* ServiceResult.swift */,
+				A24312DF24E94D5F0088F30E /* VolatileStorageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -274,6 +284,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A24312D624E7B8FD0088F30E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A24312D724E7B9080088F30E /* NetworkService.swift */,
+				A24312D924E8251F0088F30E /* APIService.swift */,
+				A24312DB24E825AA0088F30E /* Endpoints.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,6 +305,7 @@
 				330D125D1F96F40E00463505 /* Sources */,
 				330D125E1F96F40E00463505 /* Frameworks */,
 				330D125F1F96F40E00463505 /* Resources */,
+				04756387AE0E91AAA1470201 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -380,6 +401,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		04756387AE0E91AAA1470201 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HomeTime/Pods-HomeTime-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HomeTime/Pods-HomeTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5051CFD71B3DE6C53ADB09B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,15 +485,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A068C672396653A005AAA6A /* Constants.swift in Sources */,
+				A24312DA24E8251F0088F30E /* APIService.swift in Sources */,
 				330D12671F96F40E00463505 /* TramViewController.swift in Sources */,
 				331BFAA31F973E8000E10979 /* DotNetDateConverter.swift in Sources */,
+				A24312DC24E825AA0088F30E /* Endpoints.swift in Sources */,
 				330D12651F96F40E00463505 /* AppDelegate.swift in Sources */,
 				6AC37C642398B5BD00D1F128 /* TramTableCell.swift in Sources */,
 				6A4127092397B7FC0098D0E5 /* TramViewModel.swift in Sources */,
+				A24312D824E7B9080088F30E /* NetworkService.swift in Sources */,
 				6A068C642396649D005AAA6A /* TramService.swift in Sources */,
 				6A068C6B239672CD005AAA6A /* ServiceError.swift in Sources */,
 				6AC37C692398F09100D1F128 /* UIViewControllerExtension.swift in Sources */,
 				6A068C6D23967F8C005AAA6A /* ServiceResult.swift in Sources */,
+				A24312E024E94D5F0088F30E /* VolatileStorageService.swift in Sources */,
 				6AC37C672398B86A00D1F128 /* Extensions.swift in Sources */,
 				6A068C6923966814005AAA6A /* TramData.swift in Sources */,
 			);
