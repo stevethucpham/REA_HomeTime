@@ -1,11 +1,3 @@
-//
-//  TramViewModelTest.swift
-//  HomeTimeTests
-//
-//  Created by iOS Developer on 12/5/19.
-//  Copyright © 2019 REA. All rights reserved.
-//
-
 import Foundation
 import Quick
 import Nimble
