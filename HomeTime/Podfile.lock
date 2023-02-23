@@ -1,14 +1,14 @@
 PODS:
   - Alamofire (5.6.4)
-  - Nimble (8.0.4)
-  - Quick (2.2.0)
+  - Nimble (9.2.1)
+  - Quick (3.1.2)
   - SwiftLint (0.50.3)
   - Swinject (2.8.3)
 
 DEPENDENCIES:
   - Alamofire
-  - Nimble (~> 8.0)
-  - Quick (~> 2.2)
+  - Nimble (~> 9.0)
+  - Quick (~> 3.0)
   - SwiftLint
   - Swinject
 
@@ -22,11 +22,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
-  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
 
-PODFILE CHECKSUM: 6f6bf10c493015e840d3b82d6f9b0bd75e257dd8
+PODFILE CHECKSUM: 65a1d861b61bbba1b38030bd0fe6e7833e002d74
 
 COCOAPODS: 1.11.3
