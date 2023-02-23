@@ -9,6 +9,9 @@ target 'HomeTime' do
     # Pods for testing
     pod 'Quick', '~> 2.2'
     pod 'Nimble', '~> 8.0'
+    pod 'Alamofire'
+    pod 'SwiftLint'
+    pod 'Swinject'
   end
 
 end
