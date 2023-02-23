@@ -1,11 +1,3 @@
-//
-//  TramData.swift
-//  HomeTime
-//
-//  Created by iOS Developer on 12/3/19.
-//  Copyright © 2019 REA. All rights reserved.
-//
-
 import Foundation
 
 struct TramResponseObject<T: Decodable>: Decodable {

@@ -1,13 +1,9 @@
-//
-//  Copyright © 2017 REA. All rights reserved.
-//
-
 import Foundation
+import UIKit
 import Quick
 import Nimble
 @testable import HomeTime
 
-// MARK: -
 
 class TramViewControllerSpec: QuickSpec {
   

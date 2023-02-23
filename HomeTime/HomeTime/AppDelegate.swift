@@ -1,7 +1,3 @@
-//
-//  Copyright © 2017 REA. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

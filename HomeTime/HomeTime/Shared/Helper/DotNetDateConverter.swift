@@ -1,7 +1,3 @@
-//
-//  Copyright (c) 2015 REA. All rights reserved.
-//
-
 import Foundation
 
 class DotNetDateConverter {
