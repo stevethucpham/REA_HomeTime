@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
 
+gem "danger-changelog"
+gem "danger-swiftlint"
+gem "danger-junit"
 gem "fastlane"
+gem "rufo"
+gem "xcpretty"
 
